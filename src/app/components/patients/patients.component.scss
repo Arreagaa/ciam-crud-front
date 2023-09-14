@@ -91,8 +91,46 @@
 }
 
 section {
-  padding: 40px 0;
+  padding: 60px 0;
   overflow: hidden;
+}
+
+.section-bg {
+  background-color: #fff;
+}
+
+.section-title {
+  text-align: center;
+  padding-bottom: 30px;
+}
+.section-title h2 {
+  font-size: 32px;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  position: relative;
+  color: #0c3c53;
+}
+.section-title h2::before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 120px;
+  height: 1px;
+  background: #ddd;
+  bottom: 1px;
+  left: calc(50% - 60px);
+}
+.section-title h2::after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 40px;
+  height: 3px;
+  background: #00b6a9;
+  bottom: 0;
+  left: calc(50% - 20px);
 }
 
 .icon-button {
@@ -109,12 +147,12 @@ section {
   color: #00b6a9;
 }
 
-.btn.btn-modal{
+.btn.btn-modal {
   color: #fff;
   background-color: #00b6a9;
 }
 
-.btn.btn-modal:hover{
+.btn.btn-modal:hover {
   color: #fff;
   background-color: #1183c6;
 }
