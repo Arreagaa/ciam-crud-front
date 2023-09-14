@@ -1,0 +1,29 @@
+@media (min-width: 992px) {
+  .navbar-nav {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.btn-outline-info {
+  border-color: #00b6a9;
+  color: #00b6a9;
+}
+
+.btn-outline-info:hover {
+  background-color: #00b6a9;
+  border-color: #00b6a9;
+  color: #fff;
+}
+
+.nav-link {
+  font-size: 20px;
+  color: #1183c6;
+  font-style: bold;
+  margin: 12px;
+}
+
+.nav-link:hover {
+  color: #00b6a9;
+}

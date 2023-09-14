@@ -1,0 +1,265 @@
+<section id="hero">
+  <div class="hero-container">
+    <div
+      id="heroCarousel"
+      class="carousel slide carousel-fade"
+      data-bs-ride="carousel"
+      data-bs-interval="5000"
+    >
+      <ol id="hero-carousel-indicators" class="carousel-indicators"></ol>
+
+      <div class="carousel-inner" role="listbox">
+        <div
+          class="carousel-item active"
+          style="
+            background-image: url(https://assets-global.website-files.com/615f5754a32dcc094d20db13/623cec458743a55be352821b_62311d7332f7d8531064072d_CIAM.jpeg);
+          "
+        >
+          <div class="carousel-container">
+            <div class="container">
+              <h2 class="animate__animated animate__fadeInDown">
+                ¡SERVICIOS DE CALIDAD!
+              </h2>
+              <p class="animate__animated animate__fadeInUp">
+                ENCUENTRA TODO LO QUE NECESITAS PARA TU SALUD
+              </p>
+
+              <a
+                class="btn-get-started scrollto animate__animated animate__fadeInUp"
+                type="button"
+                data-bs-toggle="modal"
+                data-bs-target="#modalAgregarActualizarPaciente"
+                ><i class="bi bi-file-earmark-plus"></i> AGREGAR PACIENTE
+                POTENCIAL</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services section-bg">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6 mb-3" *ngFor="let item of listPatients">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ item.name }} {{ item.lastname }}</h5>
+            <p class="fw-bold">{{ item.patientType }}</p>
+            <p class="card-text-mini">
+              Se identifica con
+              <span class="fw-bold">{{ item.documentType }}</span> <br />
+              No. de identificacion
+              <span class="fw-bold">{{ item.identificationNumber }}</span>
+            </p>
+            <ul class="card-list">
+              <li>
+                Fecha de nacimiento: {{ item.birthDate | date : "dd/MM/yyyy" }}
+              </li>
+              <li>Género: {{ item.gender }}</li>
+              <li>
+                Dirección: {{ item.address }}, {{ item.municipality }},
+                {{ item.department }}
+              </li>
+            </ul>
+            <p class="card-text">
+              Ponerse en contacto con el paciente potencial a través de:
+            </p>
+            <ul class="card-list">
+              <li>Teléfono: {{ item.phoneNumber }}</li>
+              <li>Correo electrónico: {{ item.email }}</li>
+            </ul>
+            <div class="d-flex gap-3">
+              <button
+                class="icon-button"
+                type="button"
+                data-bs-toggle="modal"
+                data-bs-target="#modalAgregarActualizarPaciente"
+                (click)="selectItem(item)"
+              >
+                <i class="fa-solid fa-user-pen"></i>
+              </button>
+              <button class="icon-button" type="button" (click)="delete(item.patientID)">
+                <i class="fa-solid fa-user-minus"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div
+  class="modal fade"
+  id="modalAgregarActualizarPaciente"
+  tabindex="-1"
+  aria-labelledby="modalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #00b6a9; color: white">
+        <h5 class="modal-title fs-5" *ngIf="!isUpdate">Nuevo Paciente</h5>
+        <h5 class="modal-title fs-5" *ngIf="isUpdate">Actualizar Paciente</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          (click)="newPatient()"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formPatient">
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Nombre</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" formControlName="name" />
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Apellido</label>
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="lastname"
+              />
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">No. Identificación</label>
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="identificationNumber"
+              />
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Tipo de Documento</label>
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="documentType"
+              />
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Fecha de Nacimiento</label>
+            <div class="col-sm-10">
+              <input
+                type="date"
+                class="form-control"
+                formControlName="birthDate"
+              />
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Género</label>
+            <div class="col-sm-10">
+              <select class="form-select" formControlName="gender">
+                <option value="Masculino">Masculino</option>
+                <option value="Femenino">Femenino</option>
+                <option value="indefinido">Prefiero no decirlo</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Dirección</label>
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="address"
+              />
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Departamento</label>
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="department"
+              />
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Municipio</label>
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="municipality"
+              />
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Teléfono</label>
+            <div class="col-sm-10">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="phoneNumber"
+              />
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Correo Electrónico</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" formControlName="email" />
+            </div>
+          </div>
+
+          <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label">Tipo de paciente</label>
+            <div class="col-sm-10">
+              <select class="form-select" formControlName="patientType">
+                <option value="VIP">VIP</option>
+                <option value="Standard">Standard</option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+        <button
+          *ngIf="!isUpdate"
+          type="button"
+          class="btn btn-modal"
+          data-bs-dismiss="modal"
+          (click)="save()"
+        >
+          Guardar
+        </button>
+        <button
+          *ngIf="isUpdate"
+          type="button"
+          class="btn btn-modal"
+          data-bs-dismiss="modal"
+          (click)="update()"
+        >
+          Actualizar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
