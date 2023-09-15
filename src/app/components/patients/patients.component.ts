@@ -78,6 +78,7 @@ export class PatientsComponent implements OnInit {
         if (res) {
           this.list();
           this.formPatient.reset();
+          this.isUpdate = false;
           Swal.fire({
             icon: 'success',
             title: 'Se ha actualizado al paciente potencial correctamente',
@@ -117,6 +118,7 @@ export class PatientsComponent implements OnInit {
             if (res) {
               this.list();
               this.formPatient.reset();
+              this.isUpdate = false;
               Swal.fire({
                 icon: 'success',
                 title: 'Se ha eliminado al paciente potencial correctamente',
